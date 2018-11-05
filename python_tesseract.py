@@ -10,7 +10,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("-iy", "--image_y", required=True, help="path to input image of Y coordinates ")
 ap.add_argument("-ix", "--image_x", required=True, help="path to input image of X coordinates ")
 ap.add_argument("-p", "--preprocess", type=str, default="thresh", help="type of preprocessing")
-ap.add_argument("-o", "--output", type=str, default="output.txt", help="output file name")
+ap.add_argument("-o", "--output", type=str, default="output", help="output file name")
 args = vars(ap.parse_args())
 
 image_x = cv2.imread(args["image_x"])
@@ -43,19 +43,34 @@ coordinates_y = text_y.split()
 
 if len(coordinates_y) != len(coordinates_x):
 	print("!Warning! List of X and Y coordinates dont have same length")
-	exit()
 
-outfile = open(args["output"], "w+")
+
+outfile_y = open(args["output"]+ "_y.txt", "w+")
+outfile_x = open(args["output"]+"_x.txt", "w+")
 outText = ""
-
+'''
 for n in range(0, len(coordinates_y)):
 	outText += coordinates_y[n]
 	outText += " "
 	outText += coordinates_x[n]
+	outText += " "
+'''
+for n in range(0, len(coordinates_x)):
+	outText += coordinates_x[n]
 	outText += "\n"
 
-outfile.write(outText)
-outfile.close()
+outfile_x.write(outText)
+
+outText = ""
+
+for n in range(0, len(coordinates_y)):
+	outText += coordinates_y[n]
+	outText += "\n"
+
+outfile_y.write(outText)
+
+outfile_y.close()
+outfile_x.close()
 
 #cv2.imshow("Image", image)
 #cv2.imshow("Output", gray)
