@@ -42,7 +42,7 @@ coordinates_x = text_x.split()
 coordinates_y = text_y.split()
 
 if len(coordinates_y) != len(coordinates_x):
-	print("!Warning! List of X and Y coordinates dont have same length")
+	print("!!!Warning!!! -  List of X and Y coordinates dont have same length")
 
 
 outfile_y = open(args["output"]+ "_y.txt", "w+")
